@@ -6,7 +6,7 @@ namespace SimpleFSM
     {
         private List<ITransition> _transitions = new List<ITransition>();
 
-        protected override void OnEnter()
+        protected sealed override void OnEnter()
         {
             int counter = 0;
 
@@ -19,7 +19,7 @@ namespace SimpleFSM
             Start();
         }
 
-        protected override void OnExit()
+        protected sealed override void OnExit()
         {
             int counter = 0;
 
@@ -30,6 +30,18 @@ namespace SimpleFSM
             }
 
             Stop();
+        }
+
+        protected void SwitchState(IState nextState)
+        {
+            try
+            {
+                Context.Invoke(nextState);
+            }
+            catch
+            {
+
+            }
         }
 
         protected abstract void Stop();

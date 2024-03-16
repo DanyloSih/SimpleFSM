@@ -1,6 +1,6 @@
 {
   "name": "com.danpie.simple-fsm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "SimpleFSM",
   "description": "Contains essentials for NonMonobehaviour Finite State Machine.",
   "unity": "2017.1",
