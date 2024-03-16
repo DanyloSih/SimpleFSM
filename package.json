@@ -1,0 +1,15 @@
+{
+  "name": "com.danpie.simple-fsm",
+  "version": "1.0.0",
+  "displayName": "SimpleFSM",
+  "description": "Contains essentials for NonMonobehaviour Finite State Machine.",
+  "unity": "2017.1",
+  "documentationUrl": "https://github.com/DanyloSih/SimpleFSM",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "author": {
+    "name": "",
+    "email": "geratosfen@gmail.com",
+    "url": "https://www.linkedin.com/in/danylo-s-33118a21b/"
+  }
+}
