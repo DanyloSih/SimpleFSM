@@ -2,63 +2,32 @@
 
 namespace SimpleFSM
 {
-    public delegate void StateSwitchHandler(IState nextState);
-
-    public class StateMachine : IStateMachine
+    public class StateMachine
     {
-        public IState CurrentState { get; private set; }
-        public bool IsActive { get; private set; }
+        private State _currentState;
 
-        public void Start(IState startState)
+        public State CurrentState { get => _currentState; }
+
+        public StateMachine(State initialState)
         {
-            if (IsActive)
-            {
-                throw new InvalidOperationException($"\"{this.GetType().Name}\" SM already started!");
-            }
-
-            if (startState == null)
+            if (initialState == null)
             {
                 throw new ArgumentNullException();
             }
 
-            SwitchState(startState);
-            IsActive = true;
+            _currentState = initialState;
+            _currentState.Enter(null);
         }
 
-        public void Stop()
+        public void Update(float deltaTime)
         {
-            if (!IsActive)
+            State nextState = _currentState.Update(deltaTime);
+            if (nextState != null)
             {
-                throw new InvalidOperationException($"\"{this.GetType().Name}\" SM not started yet!");
+                _currentState.Exit();
+                nextState.Enter(_currentState);
+                _currentState = nextState;
             }
-
-            if (CurrentState != null)
-            {
-                CurrentState.Exit();
-                IsActive = false;
-            }
-        }
-
-        protected void SwitchState(IState nextState)
-        {
-            if (nextState == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            if (CurrentState != null)
-            {
-                CurrentState.Exit();
-            }
-
-            OnBeforeSwitchingState(CurrentState, nextState);
-            CurrentState = nextState;
-            CurrentState.Enter(SwitchState);
-        }
-
-        protected virtual void OnBeforeSwitchingState(IState previousState, IState nextState)
-        {
-
         }
     }
 }
