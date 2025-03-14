@@ -2,12 +2,12 @@
 
 namespace SimpleFSM.Common
 {
-    public class ConditionTransition : State
+    public class ConditionalTransition : State
     {
         private Func<bool> _condition;
         private State _nextState;
 
-        public ConditionTransition(
+        public ConditionalTransition(
             Func<bool> condition,
             State nextState)
         {
