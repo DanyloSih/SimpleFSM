@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SimpleFSM
 {
-    public abstract class State
+    public class State
     {
         private List<State> _substates = new ();
 
